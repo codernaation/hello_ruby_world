@@ -1,0 +1,17 @@
+body {
+  background-color:#f1fafa;
+  font-family:Geneva,Arial,Helvetica,sans-serif;
+  margin: 0px auto;
+  max-width:900px;
+  border:solid;
+  border-color:#FFFFFF;
+}
+
+div.simple_log {
+  font-size: 18px;
+  color: #330055;
+  border: 1px solid red;
+  margin-left: 15%;
+  background-color:#f1f3f1;
+  width: 70%;
+}
