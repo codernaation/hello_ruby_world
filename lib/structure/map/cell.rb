@@ -26,7 +26,7 @@ module Adopt
     end
 
     class Cell < Position
-
+      include Adopt::DirectionDecoder
       attr_accessor :ways_to_move, :type, :cell_ocupator
 
       def initialize type
@@ -73,6 +73,25 @@ module Adopt
 
       def random_direction 
         @ways_to_move[rand(ways_to_move.size)]
+      end
+
+      def move grid_get_method
+        unit_transfer ways2cells(grid_get_method).first
+      end
+
+      private
+
+      def ways2cells grid_get_method
+        potential_new_cells = []
+        @ways_to_move.each do |way|
+          position = way2pos way
+          potential_cell = grid_get_method.call(position['x'], position['y']) 
+          unless potential_cell.ocupate?
+            potential_new_cells << potential_cell
+          end
+        end
+        puts potential_new_cells
+        potential_new_cells
       end
     end
   end

@@ -11,34 +11,10 @@ module Adopt
     def step_forward
       o_cells = @grid.get_cell_by_ocupate true
       no_cells = @grid.get_cell_by_ocupate false 
+      gg_by_pos_method = @grid.method :get_cell_by_position
       o_cells.each do |this_cell|
         @file.write "<div class=\"simple_log\">"
-        attempt = false
-        until attempt
-          way = this_cell.random_direction
-          @file.write "<li>#{way} #{this_cell.cell_ocupator.description} #{this_cell.cell_ocupator.gender} "
-          pos = this_cell.way2pos way
-          @file.write "(#{pos['x']}; #{pos['y']})</li>" 
-          next_cell = @grid.get_cell_by_position(pos['x'], pos['y'])
-          if no_cells.include? next_cell 
-            attempt = true
-            @file.write "#{attempt} <br></div>"
-            unit = this_cell.cell_ocupator
-            this_cell.unit_transfer next_cell
-          elsif ((next_cell.cell_ocupator.gender.to_s == "Female") && 
-            (this_cell.cell_ocupator.gender.to_s == "Male"))
-            pair = Adopt::Sex::Pair.new(this_cell.cell_ocupator.gender, next_cell.cell_ocupator.gender)
-            @incidents.add_pair pair
-            @file.write "<br>#{pair.description}<br>"
-            attempt = true
-          elsif ((next_cell.cell_ocupator.gender.to_s == "Male") && 
-            (this_cell.cell_ocupator.gender.to_s == "Female"))
-            @file.write "<strong>Female can't go to Male's cell</strong><br>"
-          else 
-            @file.write "<strong>Male can't go to Male's cell</strong><br>"
-            attempt = false
-          end
-        end
+        this_cell.move gg_by_pos_method
         @file.write "</div>"
         no_cells = @grid.get_cell_by_ocupate false
       end

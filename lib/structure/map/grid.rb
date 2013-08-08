@@ -110,7 +110,7 @@ module Adopt
       private
 
       def pos_to_type x, t, m
-        @x_collection[x] = Cell.new(t).update_position(m).extend Adopt::DirectionDecoder
+        @x_collection[x] = Cell.new(t).update_position(m)
       end
 
       def copy y, arr
