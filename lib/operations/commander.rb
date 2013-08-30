@@ -3,7 +3,7 @@ module Adopt
     def initialize str, size
       @parser  = Adopt::Interpreter::Parser.new str
       @grid = Adopt::Positions::Grid.new size
-      @file = File.new("migration.html", "w")
+      @file = File.new "Migration.html", "w" 
       @incidents = Adopt::Sex::GroupAnalize.new
       start
     end
@@ -12,11 +12,10 @@ module Adopt
       o_cells = @grid.get_cell_by_ocupate true
       no_cells = @grid.get_cell_by_ocupate false 
       gg_by_pos_method = @grid.method :get_cell_by_position
+      insidence_add = @incidents.method :add_pair
       o_cells.each do |this_cell|
         @file.write "<div class=\"simple_log\">"
-        this_cell.move gg_by_pos_method
-        @file.write "</div>"
-        no_cells = @grid.get_cell_by_ocupate false
+        this_cell.move gg_by_pos_method, @file, insidence_add
       end
       puts
       @grid.print_ocupate
@@ -38,7 +37,7 @@ module Adopt
         <head>
         <meta charset=\"utf-8\" >
         <title>HTML5</title>
-        <link rel=\"stylesheet\" href=\"css/mig.css\">
+        <link rel=\"stylesheet\" href=\"lib/css/mig.css\">
         </head>
         <body>
         <header>

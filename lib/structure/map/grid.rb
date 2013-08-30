@@ -1,14 +1,5 @@
 module Adopt
   module Positions
-    module GridAgent
-      def self.extended
-        self.class.send :attr_accessor, :blocked
-      end
-
-      def mark_open_ways
-        
-      end
-    end
     class Grid
       def initialize size
         if size < 2
@@ -83,10 +74,10 @@ module Adopt
         @collection.each do |y|
           y.each do |x|
             if x.ocupate?
-              if x.cell_ocupator.gender.to_s == "Male"
-                printf("%s|", x.cell_ocupator.description)
+              if x.male?
+                printf("%s|", x.description)
               else
-                printf("|%s", x.cell_ocupator.description)
+                printf("|%s", x.description)
               end
               
             else

@@ -16,6 +16,18 @@ module Adopt
         @picture = 0
         super description
       end
+
+      def male?
+        @gender.respond_to?(:rang)
+      end
+
+      def female?
+        @gender.respond_to?(:body) and @gender.respond_to?(:state_symbolize)
+      end
+
+      def descriptions
+        " Unit #{@description.capitalize} - #{self.gender.description}"
+      end
     end
 
     class UnitBuilder
