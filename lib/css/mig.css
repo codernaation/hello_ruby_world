@@ -15,3 +15,9 @@ div.simple_log {
   background-color:#f1f3f1;
   width: 70%;
 }
+div div.sex {
+  background-color: #2ced12;
+}
+div div.fight {
+  background-color: #FFed12;
+}

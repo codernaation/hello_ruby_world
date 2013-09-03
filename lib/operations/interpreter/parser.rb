@@ -1,5 +1,6 @@
 module Adopt
   module Interpreter
+    
     class Expression 
 
     end
@@ -22,7 +23,7 @@ module Adopt
           when 0
             gender = Gender::Male.new(rand(5), rand(3))
           when 1
-            gender = Gender::Female.new(rand(5), rand(3))
+            gender = Gender::Female.new(rand(5), rand(3), rand(4))
         end
         gender
       end
