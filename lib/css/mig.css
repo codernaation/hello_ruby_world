@@ -7,6 +7,10 @@ body {
   border-color:#FFFFFF;
 }
 
+body.render {
+  margin: 0px auto;
+}
+
 div.simple_log {
   font-size: 18px;
   color: #330055;
@@ -20,4 +24,48 @@ div div.sex {
 }
 div div.fight {
   background-color: #FFed12;
+}
+
+div.row {
+  display: table;
+}
+
+div.cell {
+  background-image: url(../img/cell.jpg);
+  display: table-cell;
+  float: left;
+  height: 50px;
+  width: 50px;
+}
+
+div.male {
+  background-image: url(../img/male.jpg);
+  display: table-cell;
+  float: left;
+  height: 50px;
+  width: 50px;
+}
+
+div.female {
+  background-image: url(../img/female.jpg);
+  display: table-cell;
+  float: left;
+  height: 50px;
+  width: 50px;
+}
+
+div.male_sex {
+  background-image: url(../img/male_sex.jpg);
+  display: table-cell;
+  float: left;
+  height: 50px;
+  width: 50px;
+}
+
+div.female_sex {
+  background-image: url(../img/female_sex.jpg);
+  display: table-cell;
+  float: left;
+  height: 50px;
+  width: 50px;
 }

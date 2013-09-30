@@ -1,32 +1,51 @@
 module Adopt
   class Commander
     def initialize str, size
-      @parser  = Adopt::Interpreter::Parser.new str
-      @grid = Adopt::Positions::Grid.new size
       @file = File.new "Migration.html", "w" 
       @incidents = Adopt::Sex::GroupAnalize.new
+      init_cell_share size
+      @grid = Adopt::Positions::Grid.new @share_for_cell
+      init_unit_share str
+      @parser  = Adopt::Interpreter::Parser.new @share_for_unit
       start
     end
 
     def step_forward
-      o_cells = @grid.get_cell_by_ocupate true
-      no_cells = @grid.get_cell_by_ocupate false 
-      gg_by_pos_method = @grid.method :get_cell_by_position
-      insidence_add = @incidents.method :add_pair
-      o_cells.each do |this_cell|
+      ocupated = @grid.get_cell_by_ocupate true
+      nonocupated = @grid.get_cell_by_ocupate false 
+      ocupated.each do |this_cell|
         @file.write "<div class=\"simple_log\">"
-        this_cell.move gg_by_pos_method, @file, insidence_add
+        this_cell.move
       end
-      puts
       @grid.print_ocupate
+      @grid.render_ocupate
     end
 
     def all
+      cells = @grid.get_cell_by_ocupate true
+      cells.each do |cell|
+        @file.write cell.picture.show unless cell.picture.nil?
+      end if !cells.empty?
       @file.write "#{@incidents.by_pairs} </body>
                     </html>"
     end
 
     private
+    def init_cell_share size
+      @share_for_cell = {
+        write:    @file.method(:write),
+        add_pair: @incidents.method(:add_pair),
+        size:     size
+      }
+    end
+
+    def init_unit_share str
+      @share_for_unit = {
+        by_pos:   @grid.method(:get_cell_by_position),
+        str: str
+      }
+    end
+
     def start
       @parser.expression
       @grid.fill
