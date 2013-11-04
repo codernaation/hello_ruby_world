@@ -9,7 +9,7 @@ module Adopt
     end
 
     class Unit < Source
-      attr_accessor :gender, :picture
+      attr_accessor :gender, :picture, :description
 
       def initialize description
         @gender  = 0
@@ -22,7 +22,7 @@ module Adopt
       end
 
       def female?
-        @gender.respond_to?(:body) and @gender.respond_to?(:state_symbolize)
+        @gender.respond_to?(:body) && @gender.respond_to?(:state_symbolize)
       end
 
       def descriptions
@@ -44,10 +44,6 @@ module Adopt
       def add_picture picture = Environment::Container.new
         @unit.picture = picture if picture.instance_of? Environment::Container
       end
-
-      def description
-        "#{@unit.description}<br>#{@unit.gender.description}<br>#{@unit.picture.descriptions}<br>" 
-      end 
     end
   end
 end

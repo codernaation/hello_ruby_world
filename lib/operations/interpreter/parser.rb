@@ -8,9 +8,10 @@ module Adopt
     class Parser < Positions::Grid
 
       attr_accessor :objects
-      def initialize text
+      def initialize shared
+        Units::Unit.send(:define_method, :get_cells, &shared[:by_pos])
         @objects = Environment::Container.new
-        @tokens = text.scan(/\(|\)|[\w\.\*]+/).uniq
+        @tokens = shared[:str].scan(/\(|\)|[\w\.\*]+/).uniq
         @file = File.new("population.html", 'w')
       end
 

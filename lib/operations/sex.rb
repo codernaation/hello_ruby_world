@@ -37,16 +37,16 @@ module Adopt
         if @sex_incidents.has_key? pair.id 
           @sex_incidents[pair.id][:count] += 1       
         else
-          @sex_incidents.store(pair.id, { :male => pair.unit_male.description, 
-                                          :female => pair.unit_female.description,
-                                          :count => 1 })
+          @sex_incidents.store(pair.id, { male: pair.unit_male.description, 
+                                          female: pair.unit_female.description,
+                                          count: 1 })
         end
       end
 
       def by_pairs
         statistic = Array.new
         @sex_incidents.each_value do |row|
-          statistic.push "Male #{row[:male].capitalize} and female #{row[:female].capitalize} had sex #{row[:count]} times."
+          statistic.push "Male #{row[:male].capitalize} and female #{row[:female].capitalize} had sex #{row[:count]} times.<br>"
         end
         statistic.join '<br>'
       end

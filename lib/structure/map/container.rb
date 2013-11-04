@@ -12,12 +12,13 @@ module Adopt
         @sut << source
       end
 
-      def descriptions
+      def show
         if @sut.empty?
           "Doesn't know anythink!!"
         else
-          @sut.each do |d|
-            d.description
+          @sut.each do |unit|
+            p unit
+            unit.description unless unit.nil?
           end
         end        
       end

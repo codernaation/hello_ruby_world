@@ -128,16 +128,20 @@ module Adopt
                   #{self.descriptions}<br>
                   #{next_cell.descriptions}<br></li></div></div>"
                 attempt = true
+                self.picture.add_source next_cell.cell_ocupator
               when :menstruation
-                attempt = true 
+                attempt = true
+                self.picture.add_source next_cell.cell_ocupator 
                 file.write " She has menstruation.</li></div>"
               when :walkingup
                 self.picture.add_source next_cell.behavior.call
                 attempt = true
+                self.picture.add_source next_cell.cell_ocupator
                 file.write " she wants to ask.</li></div>"
               when :walkingdown
                 next_cell.behavior.call self.gender
                 attempt = true
+                self.picture.add_source next_cell.cell_ocupator
                 file.write " she wants to speak.</li></div>"
               end
             elsif next_cell.male? && self.male?
@@ -152,6 +156,7 @@ module Adopt
               elsif !(self.behavior.call next_cell.gender)
                 attempt = false
                 file.write " self desided to escape.</li>"
+                self.picture.add_source next_cell.cell_ocupator
               end
             elsif !next_cell.ocupate?
               file.write " |_|</li></div>"
@@ -177,14 +182,7 @@ module Adopt
         @ways_to_move.each do |way|
           position = way2pos way
           potential_cell = grid_get_method.call(position['x'], position['y']) 
-          # if self.male? 
-          #   !potential_cell.ocupate? or potential_cell.female? or potential_cell.ma
-              @candidate_cells << potential_cell
-          # elsif self.female?
-            
-          # else
-          #   raise "candidate cells?!"
-          # end
+          @candidate_cells << potential_cell
         end
       end
     end

@@ -45,6 +45,10 @@ module Adopt
         end
       end
 
+      def update
+        @rang.power += 1 if @rang.power < 4
+      end
+
       def description
         "He is #{POWER[@rang.power]} male."
       end
@@ -76,6 +80,10 @@ module Adopt
 
       def state_symbolize
         @body.state.class.to_s.split('::').last.downcase.to_sym
+      end
+
+      def update
+        @body.next_state
       end
 
       def description
