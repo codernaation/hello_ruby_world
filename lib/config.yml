@@ -1,0 +1,12 @@
+:population:
+  # specify 
+  :elite: 5
+  :normal: 8
+  :weak: 11
+  # or just 
+  :total:
+
+:grid:
+  :size: 15
+
+:times: 100
